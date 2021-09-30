@@ -1,0 +1,68 @@
+---
+title: "Relacion 1"
+author: "Ana Solís García"
+date: "30/9/2021"
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Relación 1
+
+```{r}
+source("teoriadecision_funciones_incertidumbre.R")
+```
+
+
+## Ejercicio 1
+Dadas dos tablas considerando a) como beneficios y b) como costes.
+
+### Apartado a)
+```{r}
+vectorfilas1a = c (5,4,6,2,3,1,-1,8,7,5,2,0)
+tabla1a = crea.tablaX(vectorfilas1a, numalternativas = 4, numestados = 3)
+tabla1a
+```
+
+Método de Wald
+
+```{r}
+(sol01a_W = criterio.Wald(tabla1a, favorable = T))
+```
+La mejor alternativa según el criterio de Wald es la "d1".
+
+```{r}
+criterio.Todos(tabla1a,alfa= 0.5, favorable = T)
+```
+```{r}
+dibuja.criterio.Hurwicz(tabla1a,favorable = T)
+```
+
+
+### Apartado b)
+```{r}
+vectorfilas1b = c(2,12,-3,5,5,-1,0,10,-2)
+tabla1b = crea.tablaX(vectorfilas1b, numalternativas = 3, numestados = 3)
+tabla1b
+```
+```{r}
+criterio.Todos(tabla1b, favorable = F)
+```
+```{r}
+criterio.Savage(tabla1b, favorable = F)
+```
+
+```{r}
+dibuja.criterio.Hurwicz(tabla1b, favorable = F)
+```
+
+
+
+

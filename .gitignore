@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+*.html
+#no me hace un seguimiento de los html
