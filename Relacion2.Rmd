@@ -1,0 +1,196 @@
+---
+title: "Relación 2"
+author: "Ana Solís García"
+date: "19/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+source("teoriadecision_funciones_multicriterio.R")
+library(kableExtra)
+source("teoriadecision_funciones_multicriterio_utiles.R")
+source("teoriadecision_funciones_multicriterio_diagram.R")
+```
+
+# Problema 1
+
+## Apartado a)
+
+### Método Maximal
+
+```{r}
+m01A = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,0,1,1,1,1,0,0,1), v.nombres.alternativas = c("a1","a2","a3"), numalternativas = 3)
+m01A
+```
+
+Método de construcción de utilidad "Maximal"
+
+```{r}
+sol01A = multicriterio.constfuncutilidad.maximales(m01A)
+sol01A
+```
+
+Ordenadas de mejor a menor
+
+```{r}
+sort(sol01A, decreasing = TRUE)
+```
+
+### Método Borroso
+
+Método de construcción de utilidad "Borroso"
+
+```{r}
+sol01A.borr = multicriterio.constfuncutilidad.estructuraborrosa(m01A)
+sol01A.borr
+```
+
+Ordenadas de mejor a peor
+
+```{r}
+sort(sol01A.borr, decreasing = TRUE)
+```
+
+## Apartado b)
+
+```{r}
+m01B = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,0,1,1,1,1,1,0,1), v.nombres.alternativas = c("a1","a2","a3"), numalternativas = 3)
+m01B
+```
+
+Método de construcción de utilidad "Maximal"
+
+```{r}
+sol01B = multicriterio.constfuncutilidad.maximales(m01B)
+sol01B
+```
+
+Ordenadas de mejor a menor
+
+```{r}
+sort(sol01B, decreasing = TRUE)
+```
+
+## Apartado d)
+
+### Método Maximal
+
+```{r}
+m01D = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,1,1,0,1,
+                                                                    0,1,0,0,1,
+                                                                    1,0,1,0,1,
+                                                                    1,1,1,1,0,
+                                                                    0,0,0,0,1), v.nombres.alternativas = c("a1","a2","a3", "a4", "a5"), numalternativas = 5)
+m01D
+```
+
+Método de construcción de utilidad "Maximal"
+
+```{r}
+sol01D = multicriterio.constfuncutilidad.maximales(m01D)
+sol01D
+```
+
+Ordenadas de mejor a menor
+
+```{r}
+sort(sol01D, decreasing = TRUE)
+```
+
+### Método Borroso
+
+Método de construcción de utilidad "Borroso"
+
+```{r}
+sol01D.borr = multicriterio.constfuncutilidad.estructuraborrosa(m01D)
+sol01D.borr
+```
+
+Ordenadas de mejor a peor
+
+```{r}
+sort(sol01D.borr, decreasing = TRUE)
+```
+
+## 
+
+# Problema 2
+
+## Apartado a)
+
+No se puede aplicar el método Maximal
+
+```{r}
+m02A = multicriterio.crea.matrizvaloraciones(vector_matporfilas =c(0,0.4,0.3,0.6,0), numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
+```
+
+### Método Borroso
+
+Método de construcción de la función de utilidad 'Borroso'
+
+```{r}
+m02A = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(0,0.4,0.7,0.2,0,0.5,0.3,0.6,0), numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
+m02A
+```
+
+```{r}
+sol02A.borr = multicriterio.constfuncutilidad.estructuraborrosa(m02A)
+sol02A.borr
+```
+
+## Apartado b)
+
+# Problema 3
+
+```{r}
+m03= multicriterio.crea.matrizdecision(vector_matporfilas = c(100,15,7,40,50,
+                                                              200,25,7,60,200,
+                                                              100,20,4,25,25,
+                                                              200,30,20,70,350,
+                                                              250,25,15,100,500),numalternativas = 5, numcriterios = 5 )
+m03
+```
+
+## Apartado a)
+
+```{r}
+sol03a = multicriterio.homogeneizacion.nadir(m03)
+sol03a
+```
+
+### Apartado a) con el criterio C1
+
+```{r}
+m03.b= multicriterio.crea.matrizdecision(vector_matporfilas = c(-100,15,7,40,50,
+                                                              -200,25,7,60,200,
+                                                              -100,20,4,25,25,
+                                                              -200,30,20,70,350,
+                                                              -250,25,15,100,500),numalternativas = 5, numcriterios = 5 )
+m03.b
+```
+
+```{r}
+sol03a.b = multicriterio.homogeneizacion.nadir(m03.b)
+sol03a.b
+```
+
+## Apartado b)
+
+```{r}
+sol03b = multicriterio.homogeneizacion.promethee(m03, v.delta.min = c(30,3,4,20,100), v.delta.max = c(120,12,10,60,400)) 
+ # v.delta.min vector de los minimos 
+ # v.delta.max vector de los maximos 
+sol03b
+```
+
+***Instalar el paquete ahp:***
+
+```{r}
+# En https://github.com/gluc/ahp
+# install.packages(c("shinythemes", "shinyAce","shinyjs"))
+# devtools::install_github("gluc/ahp", build_vignettes = TRUE)
+```

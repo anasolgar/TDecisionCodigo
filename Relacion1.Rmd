@@ -112,7 +112,7 @@ dibuja.criterio.Hurwicz(tabla3, favorable = T)
 
 Para alfa en [0,0.7] la mejor alternativa para el criterio optimista sería "d2" y para alfa en [0.7,1] la mejor alternativa sería "d4"
 
-# Ejercicio 4
+## Ejercicio 4
 
 Alternativas:
 
@@ -132,9 +132,8 @@ Estados de la naturaleza:
 
 -   Alternativa d1:
 
-```{=html}
 <!-- -->
-```
+
     -   $x_{1,1}$= 2160
 
     -   $x_{1,2}$ = 360
@@ -154,7 +153,7 @@ Estados de la naturaleza:
 **Introducción de datos**
 
 ```{r}
-b04 = crea.tablaX(c(2160,360,720,720,3480,480), numalternativas = 3, numestados = 2)
+tb04 = crea.tablaX(c(2160,360,720,720,3480,480), numalternativas = 3, numestados = 2)
 tb04
 
 ```
@@ -172,7 +171,7 @@ La mejor alternativa es **"d2="Seguros Curadita".** Añadimos el gráfico del m�
 dibuja.criterio.Hurwicz(tb04, favorable=FALSE)
 ```
 
-# Ejercicio 5
+## Ejercicio 5
 
 -   Planteamiento
 
@@ -196,10 +195,17 @@ dibuja.criterio.Hurwicz(tb04, favorable=FALSE)
 
     -   Estado e1 :
 
-        -   $x_{1,1}$= 17 -$x_{2,1}$= 156
+        -   $x_{1,1}$= 17
+        -   $x_{2,1}$= 156
         -   $x_{3,1}$= 130
 
-    -   Estado e2 : -$x_{1,2}$= 120 -$x_{2,2}$= 60 -$x_{3,2}$= 80
+    -   Estado e2 :
+
+        -   $x_{1,2}$= 120
+
+        -    $x_{2,2}$= 60
+
+        -   $x_{3,2}$= 80
 
 -   Introducción de datos:
 
@@ -221,9 +227,7 @@ d3 aparece en cuatro métodos, luego la mejor alternativa es **d3 = "Restaurante
 dibuja.criterio.Hurwicz(tb05, favorable=FALSE)
 ```
 
-# 
-
-Ejercicio 6
+## Ejercicio 6
 
 -   Planteamiento
 
@@ -257,7 +261,7 @@ dibuja.criterio.Hurwicz(tb06, favorable=TRUE)
 
 ```
 
-# Ejercicio 7
+## Ejercicio 7
 
 -   Planteamiento
 
@@ -298,7 +302,7 @@ sol07
 
 ```
 
-# Ejercicio 8
+## Ejercicio 8
 
 -   Planteamiento
 
