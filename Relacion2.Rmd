@@ -193,4 +193,5 @@ sol03b
 # En https://github.com/gluc/ahp
 # install.packages(c("shinythemes", "shinyAce","shinyjs"))
 # devtools::install_github("gluc/ahp", build_vignettes = TRUE)
+# ahp::RunGUI
 ```
