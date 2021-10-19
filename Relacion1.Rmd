@@ -8,11 +8,9 @@ output:
   pdf_document: default
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
 
 # Relación 1
 
@@ -20,11 +18,12 @@ knitr::opts_chunk$set(echo = TRUE)
 source("teoriadecision_funciones_incertidumbre.R")
 ```
 
-
 ## Ejercicio 1
+
 Dadas dos tablas considerando a) como beneficios y b) como costes.
 
 ### Apartado a)
+
 ```{r}
 vectorfilas1a = c (5,4,6,2,3,1,-1,8,7,5,2,0)
 tabla1a = crea.tablaX(vectorfilas1a, numalternativas = 4, numestados = 3)
@@ -36,25 +35,29 @@ Método de Wald
 ```{r}
 (sol01a_W = criterio.Wald(tabla1a, favorable = T))
 ```
+
 La mejor alternativa según el criterio de Wald es la "d1".
 
 ```{r}
 criterio.Todos(tabla1a,alfa= 0.5, favorable = T)
 ```
+
 ```{r}
 dibuja.criterio.Hurwicz(tabla1a,favorable = T)
 ```
 
-
 ### Apartado b)
+
 ```{r}
 vectorfilas1b = c(2,12,-3,5,5,-1,0,10,-2)
 tabla1b = crea.tablaX(vectorfilas1b, numalternativas = 3, numestados = 3)
 tabla1b
 ```
+
 ```{r}
 criterio.Todos(tabla1b, favorable = F)
 ```
+
 ```{r}
 criterio.Savage(tabla1b, favorable = F)
 ```
@@ -63,6 +66,272 @@ criterio.Savage(tabla1b, favorable = F)
 dibuja.criterio.Hurwicz(tabla1b, favorable = F)
 ```
 
+## Ejercicio 2
 
+Criterio de Hurwicz
 
+```{r}
+vectortabla2 = c(0,1,0,1,0,0,1/2,1/2,0)
+tabla2 = crea.tablaX(vectortabla2, numalternativas = 3, numestados = 3)
+tabla2
+```
 
+```{r}
+tb2Hurwicz= criterio.Hurwicz(tabla2, alfa =0.5 , favorable = T)
+tb2Hurwicz
+```
+
+Para alpha = 0.5 la mejor alternativa según el criterio de Hurwicz es "b1" o "b2"
+
+```{r}
+criterio.Hurwicz(tabla2, favorable = T)
+```
+
+Para alpha = 0.3 la mejor alternativa según el criterio de Hurwicz es "b1" o "b2"
+
+```{r}
+dibuja.criterio.Hurwicz(tabla2, favorable = T)
+```
+
+## Ejercicio 3
+
+```{r}
+tabla3 = crea.tablaX(c(24 ,19 ,10 ,16,22, 22, 23, 20,23 ,23 ,21 ,15,25,24,18,14), numalternativas = 4, numestados = 4)
+tabla3
+```
+
+```{r}
+criterio.Todos(tabla3, favorable = T)
+```
+
+Salvo por el criterio optimista, que indica que la mejor alternativa es "d4", todos los demás apuntan a que la mejor alternativa es "d2".
+
+```{r}
+dibuja.criterio.Hurwicz(tabla3, favorable = T)
+```
+
+Para alfa en [0,0.7] la mejor alternativa para el criterio optimista sería "d2" y para alfa en [0.7,1] la mejor alternativa sería "d4"
+
+# Ejercicio 4
+
+Alternativas:
+
+-   d1 = "Seguro con Security"
+
+-   d2 = "Seguro con Curadita"
+
+-   d3 = "Seguro con Preventiva"
+
+Estados de la naturaleza:
+
+-   e1 = "da a luz antes del año"
+
+-   e2 = "da a luz después de un año"
+
+-   Tabla de valoraciones:
+
+-   Alternativa d1:
+
+```{=html}
+<!-- -->
+```
+    -   $x_{1,1}$= 2160
+
+    -   $x_{1,2}$ = 360
+
+-   Alternativa d2:
+
+    -   $x_{2,1}$= 720
+
+    -   $x_{2,2}$ = 720
+
+-   Alternativa d3:
+
+    -   $x_{3,1}$= 3480
+
+    -   $x_{3,2}$ = 480
+
+**Introducción de datos**
+
+```{r}
+b04 = crea.tablaX(c(2160,360,720,720,3480,480), numalternativas = 3, numestados = 2)
+tb04
+
+```
+
+**Solución del problema** Vamos a utilizar todos los criterios eligiendo la alternativa optima la mayoritaria (con alf a = 0.6 grado de optimismo)
+
+```{r}
+sol04 = criterio.Todos(tb04, alfa=0.6, favorable = FALSE)
+sol04
+```
+
+La mejor alternativa es **"d2="Seguros Curadita".** Añadimos el gráfico del método de Hurwicz:
+
+```{r}
+dibuja.criterio.Hurwicz(tb04, favorable=FALSE)
+```
+
+# Ejercicio 5
+
+-   Planteamiento
+
+    -- Un decisior (dos personas que actuan como un único decisor). -- Modelo de costos (desfavorable).
+
+    -Alternativas:
+
+    -   d1 ="Música Loca"
+
+    -   d2 = "Baratito"
+
+    -   d3 = "Restaurante de al lado"
+
+    -Estados de la naturaleza:
+
+    -   e1 = "Comer, copas, taxi"
+
+    -   e2 = "Comer y volver andando"
+
+    -Valoraciones (costos de los dos):
+
+    -   Estado e1 :
+
+        -   $x_{1,1}$= 17 -$x_{2,1}$= 156
+        -   $x_{3,1}$= 130
+
+    -   Estado e2 : -$x_{1,2}$= 120 -$x_{2,2}$= 60 -$x_{3,2}$= 80
+
+-   Introducción de datos:
+
+```{r}
+tb05 = crea.tablaX(c(125,120,156,60,130,80), numalternativas = 3, numestados = 2)
+tb05
+```
+
+-   Resolución
+
+```{r}
+sol05 = criterio.Todos(tb05, alfa=0.5, favorable=FALSE)
+sol05
+```
+
+d3 aparece en cuatro métodos, luego la mejor alternativa es **d3 = "Restaurante de al lado"**. Añadimos el gráfico del método de Hurwicz:
+
+```{r}
+dibuja.criterio.Hurwicz(tb05, favorable=FALSE)
+```
+
+# 
+
+Ejercicio 6
+
+-   Planteamiento
+
+    -- Un decisor (dos personas que actuan como un único decisor). -- Modelo de beneficios favorable.
+
+    -- Valoraciones (costos de los dos):
+
+    -   Estado e1 :
+
+        -   $x_{1,1}$= 55 -$x_{2,1}$= 70
+        -   $x_{3,1}$= 85
+
+    -   Estado e2 : -$x_{1,2}$= 5 -$x_{2,2}$= -30 -$x_{3,2}$= -65
+
+-   Introducción de datos
+
+```{r}
+tb06 = crea.tablaX(c(55,5,70,-30,85,-65), numalternativas = 3, numestados = 2)
+tb06
+```
+
+```{r}
+sol06 = criterio.Todos(tb06, alfa = 0.5, favorable = TRUE)
+sol06
+```
+
+Alberto (pesimista o Wald): d1 Juan (optimista): d3 Dibujamos el criterio de Hurwicz:
+
+```{r}
+dibuja.criterio.Hurwicz(tb06, favorable=TRUE)
+
+```
+
+# Ejercicio 7
+
+-   Planteamiento
+
+    -   Alternativas:
+
+        -   d1 = "Invertir en negocio de un amigo"
+
+        -   d2 = "Negocio propio de alquiler de bicicletas"
+
+        -   d3 = "Montar un chiringuito"
+
+    -   Estados de la naturaleza:
+
+        -   e1 = "Tiempo bueno"
+
+        -   e2 = "Tiempo malo"
+
+    -   Tabla de valoraciones (beneficio conseguido de cada uno):
+
+        -   Estado e1 : -$x_{1,1}$= 45
+
+            \-$x_{2,1}$= 540
+
+            \-$x_{3,1}$= 900
+
+        -   Estado e2 : -$x_{1,2}$= 45 -$x_{2,2}$= -180 -$x_{3,2}$= -900
+
+-   Introducción de datos
+
+```{r}
+tb07 = crea.tablaX(c(45,45,540,-180,900,-900), numalternativas = 3, numestados = 2)
+tb07
+```
+
+```{r}
+sol07 = criterio.Todos(tb07, alfa=0.5, favorable = TRUE)
+sol07
+
+```
+
+# Ejercicio 8
+
+-   Planteamiento
+
+    -   Alternativas:
+
+        -   d1 = "contrato con editorial"
+
+        -   d2 = "Publica él mismo"
+
+    -   Estados de la naturaleza:
+
+        -   e1 = "Tiene éxito"
+
+        -   e2 = "No tiene éxito"
+
+    -   Tabla de valoraciones (beneficio conseguido de cada uno):
+
+        -   Estado e1 : -$x_{1,1}$= 1220
+
+            \-$x_{2,1}$= 310
+
+        -   Estado e2 : -$x_{1,2}$= 30 -$x_{2,2}$= -70
+
+-   Introducción de datos
+
+```{r}
+tb08 = crea.tablaX(c(220,30,310,-70), numalternativas = 2, numestados = 2)
+tb08
+```
+
+```{r}
+sol08 = criterio.Todos(tb08, alfa = 0.5, favorable = TRUE)
+sol08
+```
+
+La mejor alternativa es publicarla con la editorial (d1)
