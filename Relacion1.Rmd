@@ -299,7 +299,7 @@ tb07
 ```{r}
 sol07 = criterio.Todos(tb07, alfa=0.5, favorable = TRUE)
 sol07
-
+dibuja.criterio.Hurwicz(tb07, favorable = T)
 ```
 
 ## Ejercicio 8

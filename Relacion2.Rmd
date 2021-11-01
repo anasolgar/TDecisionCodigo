@@ -195,3 +195,179 @@ sol03b
 # devtools::install_github("gluc/ahp", build_vignettes = TRUE)
 # ahp::RunGUI
 ```
+
+# Problema 4
+
+Introducción de datos:
+
+```{r}
+nb.criterios = c("Rendimiento", "Riesgo")
+tb0401 = multicriterio.crea.matrizvaloraciones_mej(c(2), numalternativas = 2, v.nombres.alternativas = nb.criterios)
+tb0401
+```
+
+```{r}
+nb.alternativas = c("A", "B")
+tb0402a = multicriterio.crea.matrizvaloraciones_mej(c(3), numalternativas = 2, v.nombres.alternativas = nb.alternativas)
+tb0402a
+
+```
+
+```{r}
+nb.alternativas = c("A", "B")
+tb0402b = multicriterio.crea.matrizvaloraciones_mej(c(1/2), numalternativas = 2, v.nombres.alternativas = nb.alternativas)
+tb0402b
+```
+
+Obtenemos los pesos locales:
+
+```{r}
+(pl04 = multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0401))
+```
+
+En el árbol habría que apuntar los pesos locales: 0.6666667 , 0.3333333
+
+```{r}
+(pl0402a = multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0402a))
+```
+
+Según el riesgo es mejor el B que el A...
+
+```{r}
+(pl0402b = multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0402b))
+```
+
+Pesos globales:
+
+```{r}
+sol04 = multicriterio.metodoAHP.pesosglobales_entabla(pl04$valoraciones.ahp,
+                                                     rbind(pl0402a$valoraciones.ahp,
+                                                           pl0402b$valoraciones.ahp))
+sol04
+```
+
+Elegimos la alternativa A, casi el doble mejor (globalmente), en cuanto al Riesgo es mejor la B (el doble) que la A.
+
+El diagrama con la estructura jerárquica:
+
+```{r}
+xmatn01 = tb0401
+Xmatriznivel2 = array(NA,dim=c(2,2,2))
+Xmatriznivel2[,,1] = tb0402a
+Xmatriznivel2[,,2] = tb0402b
+dimnames(Xmatriznivel2)[[1]] = nb.alternativas
+dimnames(Xmatriznivel2)[[2]] = nb.alternativas
+dimnames(Xmatriznivel2)[[3]] = nb.criterios
+multicriterio.metodoahp.diagrama(xmatn01, 
+                                 Xmatriznivel2 )
+# tb0501: tabla de las comparaciones 2 a 2
+# array de 3 dimensiones: num alternativas, num alternativas y num criterios
+```
+
+## Con el paquete ahp
+
+```{r}
+# ahp::RunGUI()
+library(ahp)
+dt04 = Load("ej04.ahp")
+dt04
+
+```
+
+```{r}
+ahp::Calculate(dt04)
+ahp::AnalyzeTable(dt04, sort="orig", variable = "priority")
+ # pesos locales
+
+```
+
+```{r}
+Visualize(dt04)
+```
+
+```{r}
+ahp::AnalyzeTable(dt04, sort="orig")
+```
+
+La mejor alternativa es la A
+
+# Problema 5
+
+```{r}
+n.criterios=c("Liderazgo","HabPersonal","HabGestion")
+tb0501 = multicriterio.crea.matrizvaloraciones_mej(c(1/3,1/4,2),numalternativas = 3,v.nombres.alternativas = n.criterios)
+tb0501
+```
+
+```{r}
+n.alternativas=c("A","B")
+tb0502a = multicriterio.crea.matrizvaloraciones_mej(c(4),2,n.alternativas)
+tb0502a
+```
+
+```{r}
+tb0502b = multicriterio.crea.matrizvaloraciones_mej(c(3),2,n.alternativas)
+tb0502b
+```
+
+```{r}
+tb0502c = multicriterio.crea.matrizvaloraciones_mej(c(2),2,n.alternativas)
+tb0502c
+```
+
+Paso 2: cálculo de pesos locales
+
+```{r}
+(pl0501 =multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0501))
+```
+
+El coeficiente de inconsistencia debe quedar por debajo de 0.1 (valor frontera). Si se queda por debajo es que las comparativas que hemos hecho siguen las reglas de las comparaciones. Si no, habría alguna inconsistencia.
+
+Nos interesan los pesos ahp
+
+```{r}
+(pl0502a =multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0502a))
+```
+
+```{r}
+(pl0502b =multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0502b))
+```
+
+```{r}
+(pl0502c =multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0502c))
+
+```
+
+Paso 3: calcular pesos globales
+
+```{r}
+pg05 = multicriterio.metodoAHP.pesosglobales_entabla(pl0501$valoraciones.ahp,
+                                                     rbind(pl0502a$valoraciones.ahp,
+                                                           pl0502b$valoraciones.ahp,
+                                                           pl0502c$valoraciones.ahp))
+pg05
+```
+
+El peso de A es casi 3 veces mayor que el de B (0.25\~0.75)
+
+En `Liderazgo` es 4 vcees mas grande, con resp a la `HabPersonal` es 3 veces mas grande el A y para `HabGestion` el doble.
+
+```{r}
+num.alt=2
+num.crit=3
+Xmatriznivel2 = array(NA,dim=c(num.alt,num.alt,num.crit))
+Xmatriznivel2[,,1] = tb0502a
+Xmatriznivel2[,,2] = tb0502b
+Xmatriznivel2[,,3] = tb0502c
+dimnames(Xmatriznivel2)[[1]] = n.alternativas
+dimnames(Xmatriznivel2)[[2]] = n.alternativas
+dimnames(Xmatriznivel2)[[3]] = n.criterios
+multicriterio.metodoahp.diagrama(tb0501, 
+                                 Xmatriznivel2 )
+# tb0501: tabla de las comparaciones 2 a 2
+# array de 3 dimensiones: num alternativas, num alternativas y num criterios
+```
+
+```{r}
+#ahp::RunGUI()
+```
