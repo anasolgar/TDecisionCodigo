@@ -371,3 +371,205 @@ multicriterio.metodoahp.diagrama(tb0501,
 ```{r}
 #ahp::RunGUI()
 ```
+
+# Problema 7
+
+```{r}
+p7=multicriterio.crea.matrizdecision(c(100,15,7,40,-50,
+                                       200,25,7,60,-200,
+                                       100,20,4,25,-25,
+                                       200,30,20,70,-350,
+                                       250,25,15,100,-500),
+                                     numalternativas = 5,numcriterios = 5)
+p7
+```
+
+```{r}
+pesos = c(0.25,0.25,0.2,0.2,0.2)
+sal7 = multicriterio.metodoELECTRE_I(p7, pesos.criterios = pesos, nivel.concordancia.minimo.alpha = 0.7, no.se.compensan = c(60,Inf,4,Inf,Inf), que.alternativas = T)
+#sal7
+```
+
+```{r}
+qgraph::qgraph(sal7$relacion.dominante)
+```
+
+```{r}
+sal7$nucleo_aprox
+```
+
+```{r}
+sal7b = multicriterio.metodoELECTRE_I(p7, pesos.criterios = pesos, nivel.concordancia.minimo.alpha = 0.7, no.se.compensan = c(60,Inf,4,Inf,Inf), que.alternativas = c(4,5))
+qgraph::qgraph(sal7b$relacion.dominante)
+```
+
+```{r}
+sal7b$nucleo_aprox
+```
+
+```{r}
+sal7c = multicriterio.metodoELECTRE_I(p7, pesos.criterios = pesos, nivel.concordancia.minimo.alpha = 0.55, no.se.compensan = c(60,Inf,40,Inf,Inf), que.alternativas = c(4,5))
+qgraph::qgraph(sal7c$relacion.dominante)
+```
+
+```{r}
+sal7c$nucleo_aprox
+```
+```{r}
+r7  = func_ELECTRE_Completo(sal7)
+r7
+```
+
+
+```{r}
+#include_graphics("test.png")
+```
+```{r}
+r7$Grafo
+```
+
+```{r}
+qgraph::qgraph(r7$Grafo)
+```
+
+
+```{r}
+r7$Nucleo
+```
+
+
+## Solucion del problema 7 con Promethee
+
+```{r}
+sol7promethee2 = multicriterio.metodo.promethee_ii(p7, pesos.criterios = pesos/sum(pesos),tab.fpref = matrix(c(1,0,0,0,
+                                                                                            1,0,0,0,
+                                                                                            1,0,0,0,
+                                                                                            1,0,0,0,
+                                                                                            1,0,0,0), ncol=4, byrow = T ))
+sol7promethee2
+```
+
+```{r}
+order(sol7promethee2$vflujos.netos, decreasing = T)
+```
+
+
+
+# Problema 8
+
+
+```{r}
+tabladec.X = multicriterio.crea.matrizdecision( c(-80,90,-6,-5.4,-8,5,
+                                                  -65,58,-2,-9.7,-1,1,
+                                                  -83,60,-4,-7.2,-4,7,
+                                                  -40,80,-10,-7.5,-7,10,
+                                                  -52,72,6,2,3,8,
+                                                  -94,96,-7,-3.6,-5,6), numalternativas = 6,
+                                                numcriterios = 6,
+                                                v.nombresalt =c('A1','A2','A3','A4','A5','A6'),
+                                                v.nombrescri = c('f1','f2','f3','f4','f5','f6'))
+tabladec.X
+```
+
+```{r}
+pesos.criterios = c(1/6,1/6,1/6,1/6,1/6,1/6)
+tab.fpref = matrix (c(2,10,1,0,
+                      3,0,30,0,
+                      5,0.5,5,0,
+                      4,1,6,0,
+                      1,0,1,0,
+                      6,0,1,5), ncol = 4, byrow = T)
+tab.fpref
+```
+
+```{r}
+fpref.criterio_usual_di = function(di){
+    if (di<=0) {
+        res = 0;
+    } else {
+        res = 1;
+    }
+    return(res)
+}
+x = seq(-10,10,length.out = 100)
+y = sapply(x, fpref.criterio_usual_di)
+plot(x,y, type = "l", col = "blue", main = "Criterio usual: F1")
+```
+
+
+```{r}
+qi=2
+fpref.cuasi_criterio_di = function(di){
+    if (di<=qi) {
+        res = 0;
+    } else {
+        res = 1;
+    }
+    return(res)
+}
+x = seq(-10,10,length.out = 100)
+y = sapply(x, fpref.cuasi_criterio_di)
+plot(x,y, type = "l", col = "blue", main = "Criterio usual: F1")
+```
+
+
+```{r}
+fpref.criterio_preflineal_di = function(di){
+    if (di<=0) {
+        res = 0;
+    } else if  ( di>qi){
+        res = 1;
+    } else {
+        res = di/qi;
+    }
+    return(res)
+}
+x = seq(-10,10,length.out = 100)
+y = sapply(x, fpref.criterio_preflineal_di)
+plot(x,y, type = "l", col = "blue", main = "Criterio usual: F3 con pi=2")
+```
+
+
+```{r}
+pi=4
+fpref.criterio_nivel_di = function(di){
+    if (di<=qi) {
+        res = 0;
+    } else if  ( di>pi){
+        res = 1;
+    } else {
+        res = 0.5;
+    }
+    return(res)
+}
+x = seq(-10,10,length.out = 100)
+y = sapply(x, fpref.criterio_nivel_di)
+plot(x,y, type = "l", col = "blue", main = "Criterio usual: F4 con pi=4 qi=2")
+```
+
+
+```{r}
+fpref.criterio_preflineal_indif_di = function(di){
+    if (di<=qi) {
+        res = 0;
+    } else if  ( di>qi){
+        res = 1;
+    } else {
+        res = (di-qi)/(pi-qi);
+    }
+    return(res)
+}
+x = seq(-10,10,length.out = 100)
+y = sapply(x, fpref.criterio_preflineal_indif_di)
+plot(x,y, type = "l", col = "blue", main = "Criterio usual: F5 con qi=2 pi=4")
+```
+
+## Problema 8 con ELECTRE
+
+
+```{r}
+sal8E = multicriterio.metodoELECTRE_I(tabladec.X,
+                                      pesos.criterios = rep(1/6,6),
+                                      nivel.concordancia.minimo.alpha = 0.7,
+                                      no.se.compensan = c(Inf,6), que.alternativas = T)
+```
