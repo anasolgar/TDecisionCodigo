@@ -454,6 +454,62 @@ order(sol7promethee2$vflujos.netos, decreasing = T)
 ```
 
 
+## Solucion del problema 7 con metodo axiomatico de Arrow
+```{r}
+s7arrow = multicriterio.metodoaxiomatico.ArrowRaymond(p7)
+```
+
+Las alternativas ordenadas de mejor a peor:
+```{r}
+s7arrow$alternativasordenadas
+```
+
+## Solucion del problema 7 aplicando metodo axiomatico de forma paramétrica
+```{r}
+p7=multicriterio.crea.matrizdecision(c(100,15,7,40,-50,
+                                       200,25,7,60,-200,
+                                       100,20,4,25,-25,
+                                       200,30,20,70,-350,
+                                       250,25,15,100,-500),
+                                     numalternativas = 5,numcriterios = 5)
+p7
+```
+
+```{r}
+intalfa=seq(1,0.5, by=-0.05)
+```
+
+```{r}
+sols = vector("list",length(intalfa))
+for (i in 1:length(intalfa)){
+    p7i = p7
+    p7i[4,] = p7[4,] * intalfa[i]
+    sol = multicriterio.metodoaxiomatico.ArrowRaymond(p7i)
+    sols[[i]] = sol$alternativasordenadas
+}
+sols
+```
+
+Ver las posiciones de la alternativa "a4":
+```{r}
+posiciones_a4 = rep(NA,length(intalfa))
+for (i in 1:length(intalfa)){
+    posiciones_a4[i] = which(sols[[i]]=="a4")
+}
+posiciones_a4
+```
+
+```{r}
+# plot(intalfa,posiciones_a4,type="l")
+plot(intalfa,posiciones_a4,type="o", main = "Posiciones de la alternativa a4")  # posiciones al reves
+```
+
+
+
+
+
+
+
 
 # Problema 8
 
@@ -572,4 +628,15 @@ sal8E = multicriterio.metodoELECTRE_I(tabladec.X,
                                       pesos.criterios = rep(1/6,6),
                                       nivel.concordancia.minimo.alpha = 0.7,
                                       no.se.compensan = c(Inf,6), que.alternativas = T)
+```
+
+
+## Solucion del problema 8 con metodo axiomatico de Arrow
+```{r}
+s8arrow = multicriterio.metodoaxiomatico.ArrowRaymond(tabladec.X)
+```
+
+Las alternativas ordenadas de mejor a peor:
+```{r}
+s8arrow$alternativasordenadas
 ```
