@@ -203,7 +203,7 @@ dibuja.criterio.Hurwicz(tb04, favorable=FALSE)
 
         -   $x_{1,2}$= 120
 
-        -    $x_{2,2}$= 60
+        -   $x_{2,2}$= 60
 
         -   $x_{3,2}$= 80
 
