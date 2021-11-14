@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 source("teoriadecision_funciones_incertidumbre.R")
+source("FuncionHurwicz.R")
 ```
 
 ## Ejercicio 1
@@ -112,6 +113,12 @@ dibuja.criterio.Hurwicz(tabla3, favorable = T)
 
 Para alfa en [0,0.7] la mejor alternativa para el criterio optimista sería "d2" y para alfa en [0.7,1] la mejor alternativa sería "d4"
 
+```{r}
+# Comprobamos con la funcion creada en el trabajo 1, que se encuentra en el fichero funcionHurwicz.R
+sol3=Hurwicz.intervalos(tabla3, favorable =T)
+sol3$IntervalosAlfa
+```
+
 ## Ejercicio 4
 
 Alternativas:
@@ -128,19 +135,20 @@ Estados de la naturaleza:
 
 -   e2 = "da a luz después de un año"
 
--   Tabla de valoraciones:
+Tabla de valoraciones:
 
 -   Alternativa d1:
 
-<!-- -->
+    -   $x_{1,1}$ = 2160 (1500+300+30\*12)
 
-    -   $x_{1,1}$= 2160
-
-    -   $x_{1,2}$ = 360
+    ```{=html}
+    <!-- -->
+    ```
+    -   $x_{1,2}$ = 360 (30\*12)
 
 -   Alternativa d2:
 
-    -   $x_{2,1}$= 720
+    -   $x_{2,1}$= 720 (60 euros al mes \*12)
 
     -   $x_{2,2}$ = 720
 
@@ -195,9 +203,9 @@ dibuja.criterio.Hurwicz(tb04, favorable=FALSE)
 
     -   Estado e1 :
 
-        -   $x_{1,1}$= 17
-        -   $x_{2,1}$= 156
-        -   $x_{3,1}$= 130
+        -   $x_{1,1}$= 125 (2\*60+5)
+        -   $x_{2,1}$= 156 (la comida, la entrada a la discoteca y las copas las pagan cada uno)
+        -   $x_{3,1}$= 130 (40\*2+25\*2)
 
     -   Estado e2 :
 
@@ -237,10 +245,17 @@ dibuja.criterio.Hurwicz(tb05, favorable=FALSE)
 
     -   Estado e1 :
 
-        -   $x_{1,1}$= 55 -$x_{2,1}$= 70
+        -   $x_{1,1}$= 55 (250\*0.1+750\*0.04)
+        -   $x_{2,1}$= 70
         -   $x_{3,1}$= 85
 
-    -   Estado e2 : -$x_{1,2}$= 5 -$x_{2,2}$= -30 -$x_{3,2}$= -65
+    -   Estado e2 :
+
+        -   $x_{1,2}$= 5 (30-25)
+
+        -    $x_{2,2}$= -30
+
+        -   $x_{3,2}$= -65
 
 -   Introducción de datos
 
@@ -281,13 +296,21 @@ dibuja.criterio.Hurwicz(tb06, favorable=TRUE)
 
     -   Tabla de valoraciones (beneficio conseguido de cada uno):
 
-        -   Estado e1 : -$x_{1,1}$= 45
+        -   Estado e1 :
 
-            \-$x_{2,1}$= 540
+            -   $x_{1,1}$= 45 (5% de la cantidad aportada)
 
-            \-$x_{3,1}$= 900
+            -   $x_{2,1}$= 540
 
-        -   Estado e2 : -$x_{1,2}$= 45 -$x_{2,2}$= -180 -$x_{3,2}$= -900
+            -   $x_{3,1}$= 900
+
+        -   Estado e2 :
+
+            -   $x_{1,2}$= 45
+
+            -   $x_{2,2}$= -180
+
+            -   $x_{3,2}$= -900
 
 -   Introducción de datos
 
@@ -301,6 +324,10 @@ sol07 = criterio.Todos(tb07, alfa=0.5, favorable = TRUE)
 sol07
 dibuja.criterio.Hurwicz(tb07, favorable = T)
 ```
+
+Para María que es una persona conservadora, la mejor alternativa es **d1** (criterio pesimista)
+
+Teniendo en cuenta que queremos minimizar el máximo arrepentimiento (según el amigo de María) la mejor alternativa será **d2**
 
 ## Ejercicio 8
 
@@ -320,11 +347,17 @@ dibuja.criterio.Hurwicz(tb07, favorable = T)
 
     -   Tabla de valoraciones (beneficio conseguido de cada uno):
 
-        -   Estado e1 : -$x_{1,1}$= 1220
+        -   Estado e1 :
 
-            \-$x_{2,1}$= 310
+            -   $x_{1,1}$= 220 (20contrato+200ejemplares)
 
-        -   Estado e2 : -$x_{1,2}$= 30 -$x_{2,2}$= -70
+            -   $x_{2,1}$= 310 (200\*2-90)
+
+        -   Estado e2 :
+
+            -   $x_{1,2}$= 30
+
+            -   $x_{2,2}$= -70
 
 -   Introducción de datos
 
