@@ -1,5 +1,5 @@
 ---
-title: "repaso examen"
+title: "Repaso examen"
 author: "Ana Solís García"
 date: "24/11/2021"
 output: html_document

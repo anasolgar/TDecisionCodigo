@@ -340,7 +340,7 @@ sol07
 dibuja.criterio.Hurwicz(tb07, favorable = T)
 ```
 
-## 1) 
+## 1)
 
 Para María que es una persona conservadora, la mejor alternativa es **d1** (criterio pesimista))
 
