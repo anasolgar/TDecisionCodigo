@@ -74,6 +74,23 @@ Ordenadas de mejor a menor
 ```{r}
 sort(sol01B, decreasing = TRUE)
 ```
+## Apartado c) 
+```{r}
+m01C=multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,1,1,1,1,1,1,1,1),numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
+m01C
+```
+### Metodo  maximal
+```{r}
+sol01C=multicriterio.constfuncutilidad.maximales(m01C)
+sol01C
+```
+### Metodo  borroso
+
+```{r}
+sol01C.borr=multicriterio.constfuncutilidad.estructuraborrosa(m01C)
+sol01C.borr
+```
+
 
 ## Apartado d)
 
@@ -116,7 +133,36 @@ Ordenadas de mejor a peor
 sort(sol01D.borr, decreasing = TRUE)
 ```
 
-## 
+## Apartado e)
+
+```{r}
+m01E = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,1,1,0,1,
+                                                                    0,1,0,0,1,
+                                                                    1,1,1,0,1,
+                                                                    1,1,1,1,0,
+                                                                    0,0,0,0,1), v.nombres.alternativas = c("a1","a2","a3", "a4", "a5"), numalternativas = 5)
+m01E
+```
+
+### Metodo de maximales 
+```{r}
+sol01E = multicriterio.constfuncutilidad.maximales(m01E)
+sol01E
+```
+
+```{r}
+sort(sol01E, decreasing = T)
+```
+
+### Método Borroso
+
+Método de construcción de utilidad "Borroso"
+
+```{r}
+sol01E.borr = multicriterio.constfuncutilidad.estructuraborrosa(m01E)
+sol01E.borr
+```
+
 
 # Problema 2
 
@@ -125,17 +171,19 @@ sort(sol01D.borr, decreasing = TRUE)
 No se puede aplicar el método Maximal
 
 ```{r}
-m02A = multicriterio.crea.matrizvaloraciones(vector_matporfilas =c(0,0.4,0.3,0.6,0), numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
+m02A = multicriterio.crea.matrizvaloraciones(vector_matporfilas =c(0,0.4,0.7,0.2,0,0.5,0.3,0.6,0), numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
+m02A
 ```
+
+#### no entiendo 
+```{r}
+multicriterio.constfuncutilidad.maximales(m02A)
+```
+
 
 ### Método Borroso
 
 Método de construcción de la función de utilidad 'Borroso'
-
-```{r}
-m02A = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(0,0.4,0.7,0.2,0,0.5,0.3,0.6,0), numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
-m02A
-```
 
 ```{r}
 sol02A.borr = multicriterio.constfuncutilidad.estructuraborrosa(m02A)
@@ -143,6 +191,24 @@ sol02A.borr
 ```
 
 ## Apartado b)
+
+```{r}
+m02B=multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(0,0.2,0.4,0.9,0,0.8,0.1,0.3,0), numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
+m02B
+```
+
+### Metodo borroso
+```{r}
+sol02B=multicriterio.constfuncutilidad.estructuraborrosa(m02B)
+sol02B
+```
+```{r}
+sort(sol02B, decreasing = T)
+```
+
+
+
+
 
 # Problema 3
 
@@ -202,7 +268,7 @@ Introducción de datos:
 
 ```{r}
 nb.criterios = c("Rendimiento", "Riesgo")
-tb0401 = multicriterio.crea.matrizvaloraciones_mej(c(2), numalternativas = 2, v.nombres.alternativas = nb.criterios)
+tb0401 = multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(2), numalternativas = 2, v.nombres.alternativas = nb.criterios)
 tb0401
 ```
 
@@ -240,12 +306,12 @@ Según el riesgo es mejor el B que el A...
 Pesos globales:
 
 ```{r}
-sol04 = multicriterio.metodoAHP.pesosglobales_entabla(pl04$valoraciones.ahp,
+sol04 = multicriterio.metodoAHP.pesosglobales_entabla(pesos.criterios = pl04$valoraciones.ahp,
                                                      rbind(pl0402a$valoraciones.ahp,
                                                            pl0402b$valoraciones.ahp))
 sol04
 ```
-
+**Pesos globales** : A->0.61 y B->0.38
 Elegimos la alternativa A, casi el doble mejor (globalmente), en cuanto al Riesgo es mejor la B (el doble) que la A.
 
 El diagrama con la estructura jerárquica:
@@ -271,7 +337,6 @@ multicriterio.metodoahp.diagrama(xmatn01,
 library(ahp)
 dt04 = Load("ej04.ahp")
 dt04
-
 ```
 
 ```{r}
@@ -285,6 +350,7 @@ ahp::AnalyzeTable(dt04, sort="orig", variable = "priority")
 Visualize(dt04)
 ```
 
+Pesos globales:
 ```{r}
 ahp::AnalyzeTable(dt04, sort="orig")
 ```
@@ -350,7 +416,7 @@ pg05
 
 El peso de A es casi 3 veces mayor que el de B (0.25\~0.75)
 
-En `Liderazgo` es 4 vcees mas grande, con resp a la `HabPersonal` es 3 veces mas grande el A y para `HabGestion` el doble.
+En `Liderazgo` es 4 veces mas grande, con resp a la `HabPersonal` es 3 veces mas grande el A y para `HabGestion` el doble.
 
 ```{r}
 num.alt=2
@@ -398,6 +464,7 @@ qgraph::qgraph(sal7$relacion.dominante)
 sal7$nucleo_aprox
 ```
 
+Iteracion 2: se reducen alternativas y/o alfa
 ```{r}
 sal7b = multicriterio.metodoELECTRE_I(p7, pesos.criterios = pesos, nivel.concordancia.minimo.alpha = 0.7, no.se.compensan = c(60,Inf,4,Inf,Inf), que.alternativas = c(4,5))
 qgraph::qgraph(sal7b$relacion.dominante)
@@ -406,7 +473,7 @@ qgraph::qgraph(sal7b$relacion.dominante)
 ```{r}
 sal7b$nucleo_aprox
 ```
-
+Iteracion 3: se reducen alternativas y/o alfa (en este caso se reduce alfa)
 ```{r}
 sal7c = multicriterio.metodoELECTRE_I(p7, pesos.criterios = pesos, nivel.concordancia.minimo.alpha = 0.55, no.se.compensan = c(60,Inf,40,Inf,Inf), que.alternativas = c(4,5))
 qgraph::qgraph(sal7c$relacion.dominante)
@@ -417,20 +484,13 @@ sal7c$nucleo_aprox
 ```
 ```{r}
 r7  = func_ELECTRE_Completo(sal7)
-r7
-```
-
-
-```{r}
-#include_graphics("test.png")
-```
-```{r}
 r7$Grafo
 ```
 
 ```{r}
 qgraph::qgraph(r7$Grafo)
 ```
+
 
 
 ```{r}
@@ -565,7 +625,7 @@ fpref.cuasi_criterio_di = function(di){
 }
 x = seq(-10,10,length.out = 100)
 y = sapply(x, fpref.cuasi_criterio_di)
-plot(x,y, type = "l", col = "blue", main = "Criterio usual: F1")
+plot(x,y, type = "l", col = "blue", main = "Criterio usual: F2")
 ```
 
 

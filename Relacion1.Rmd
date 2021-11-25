@@ -94,6 +94,10 @@ Para alpha = 0.3 la mejor alternativa según el criterio de Hurwicz es "b1" o "b
 dibuja.criterio.Hurwicz(tabla2, favorable = T)
 ```
 
+```{r}
+#Hurwicz.intervalos(tabla2, favorable = T)
+```
+
 ## Ejercicio 3
 
 ```{r}
@@ -139,11 +143,8 @@ Tabla de valoraciones:
 
 -   Alternativa d1:
 
-    -   $x_{1,1}$ = 2160 (1500+300+30\*12)
+    -   $x_{1,1}$ = 2160 (1500+300+30\*12) antes del año cubre la mitad de gastos del embarazo
 
-    ```{=html}
-    <!-- -->
-    ```
     -   $x_{1,2}$ = 360 (30\*12)
 
 -   Alternativa d2:
@@ -154,7 +155,7 @@ Tabla de valoraciones:
 
 -   Alternativa d3:
 
-    -   $x_{3,1}$= 3480
+    -   $x_{3,1}$= 3480 (40\*12 + 3000 (ingreso en clinica))
 
     -   $x_{3,2}$ = 480
 
@@ -237,25 +238,39 @@ dibuja.criterio.Hurwicz(tb05, favorable=FALSE)
 
 ## Ejercicio 6
 
--   Planteamiento
+Planteamiento
 
-    -- Un decisor (dos personas que actuan como un único decisor). -- Modelo de beneficios favorable.
+-- Un decisor (dos personas que actuan como un único decisor). -- Modelo de beneficios favorable.
 
-    -- Valoraciones (costos de los dos):
+-   Alternativas
 
-    -   Estado e1 :
+    -   d1: renta variable del 25%
 
-        -   $x_{1,1}$= 55 (250\*0.1+750\*0.04)
-        -   $x_{2,1}$= 70
-        -   $x_{3,1}$= 85
+    -   d2: renta variable del 50%
 
-    -   Estado e2 :
+    -   d3:renta variable del 75%
 
-        -   $x_{1,2}$= 5 (30-25)
+-   Estados:
 
-        -    $x_{2,2}$= -30
+    -   e1: suba la bolsa
 
-        -   $x_{3,2}$= -65
+    -   e2: baje la bolsa
+
+-- Valoraciones (costos de los dos):
+
+-   Estado e1 :
+
+    -   $x_{1,1}$= 55 (250\*0.1+750\*0.04) De los 1000 euros el 25% es de la renta variable y el 75% de la renta fija
+    -   $x_{2,1}$= 70
+    -   $x_{3,1}$= 85
+
+-   Estado e2 :
+
+    -   $x_{1,2}$= 5 (30-25)
+
+    -   $x_{2,2}$= -30 (500\*0.04-500\*0.1)
+
+    -   $x_{3,2}$= -65 (250\*0.04-750\*0.1)
 
 -   Introducción de datos
 
@@ -325,7 +340,11 @@ sol07
 dibuja.criterio.Hurwicz(tb07, favorable = T)
 ```
 
-Para María que es una persona conservadora, la mejor alternativa es **d1** (criterio pesimista)
+## 1) 
+
+Para María que es una persona conservadora, la mejor alternativa es **d1** (criterio pesimista))
+
+## 2)
 
 Teniendo en cuenta que queremos minimizar el máximo arrepentimiento (según el amigo de María) la mejor alternativa será **d2**
 
@@ -372,3 +391,35 @@ sol08
 ```
 
 La mejor alternativa es publicarla con la editorial (d1)
+
+# Ejercicio excel
+
+(Estados del 10 al 40)
+
+```{r}
+library(readxl)
+datos=read_excel("SolisGarcia.xlsx",range="B4:AF7",col_names=F)
+matriz=as.matrix(datos)
+rownames(matriz)=c("a1","a2","a3","a4")
+matriz
+```
+
+```{r}
+criterio.Todos(matriz,alfa = 0.9,favorable = T)
+dibuja.criterio.Hurwicz(matriz,favorable = T)
+```
+
+```{r}
+Hurwicz.intervalos(matriz,favorable = T)
+```
+
+Para costes:
+
+```{r}
+criterio.Todos(matriz,alfa = 0.9,favorable = F)
+dibuja.criterio.Hurwicz(matriz,favorable = F)
+```
+
+```{r}
+Hurwicz.intervalos(matriz,favorable = F)
+```

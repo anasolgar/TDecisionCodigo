@@ -3,18 +3,25 @@ Alternatives: &alternatives
   A:
   B:
 Goal:
-  name: Resolver problema 4
+  name: problema 5
   preferences:
    pairwise:
-      - [Rendimiento, Riesgo, 2]
+      - [Liderazgo, Hab.personal, 1/3]
+      - [Liderazgo, Hab.gestion, 1/4]
+      - [Hab.personal, Hab.gestion, 2]
   children:
-    Rendimiento:
+    Liderazgo:
+      preferences:
+        pairwise:
+          - [A,B,4]
+      children: *alternatives
+    Hab.personal:
       preferences:
         pairwise:
           - [A,B,3]
       children: *alternatives
-    Riesgo:
+    Hab.gestion:
       preferences:
         pairwise:
-          - [A,B,1/2]
+          - [A,B,2]
       children: *alternatives

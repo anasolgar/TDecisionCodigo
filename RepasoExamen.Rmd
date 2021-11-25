@@ -1,0 +1,859 @@
+---
+title: "repaso examen"
+author: "Ana Solís García"
+date: "24/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+source("teoriadecision_funciones_multicriterio.R")
+library(kableExtra)
+source("teoriadecision_funciones_multicriterio_utiles.R")
+source("teoriadecision_funciones_multicriterio_diagram.R")
+```
+
+**Relacion 2**
+
+# Problema 1
+
+## Apartado a)
+
+### Método Maximal
+
+```{r}
+m01A = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,0,1,1,1,1,0,0,1), v.nombres.alternativas = c("a1","a2","a3"), numalternativas = 3)
+m01A
+```
+
+Método de construcción de utilidad "Maximal"
+
+```{r}
+sol01A = multicriterio.constfuncutilidad.maximales(m01A)
+sol01A
+```
+
+Ordenadas de mejor a menor
+
+```{r}
+sort(sol01A, decreasing = TRUE)
+```
+
+### Método Borroso
+
+Método de construcción de utilidad "Borroso"
+
+```{r}
+sol01A.borr = multicriterio.constfuncutilidad.estructuraborrosa(m01A)
+sol01A.borr
+```
+
+Ordenadas de mejor a peor
+
+```{r}
+sort(sol01A.borr, decreasing = TRUE)
+```
+
+## Apartado b)
+
+```{r}
+m01B = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,0,1,1,1,1,1,0,1), v.nombres.alternativas = c("a1","a2","a3"), numalternativas = 3)
+m01B
+```
+
+Método de construcción de utilidad "Maximal"
+
+```{r}
+sol01B = multicriterio.constfuncutilidad.maximales(m01B)
+sol01B
+```
+
+Ordenadas de mejor a menor
+
+```{r}
+sort(sol01B, decreasing = TRUE)
+```
+## Apartado c) 
+```{r}
+m01C=multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,1,1,1,1,1,1,1,1),numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
+m01C
+```
+### Metodo  maximal
+```{r}
+sol01C=multicriterio.constfuncutilidad.maximales(m01C)
+sol01C
+```
+### Metodo  borroso
+
+```{r}
+sol01C.borr=multicriterio.constfuncutilidad.estructuraborrosa(m01C)
+sol01C.borr
+```
+
+
+## Apartado d)
+
+### Método Maximal
+
+```{r}
+m01D = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,1,1,0,1,
+                                                                    0,1,0,0,1,
+                                                                    1,0,1,0,1,
+                                                                    1,1,1,1,0,
+                                                                    0,0,0,0,1), v.nombres.alternativas = c("a1","a2","a3", "a4", "a5"), numalternativas = 5)
+m01D
+```
+
+Método de construcción de utilidad "Maximal"
+
+```{r}
+sol01D = multicriterio.constfuncutilidad.maximales(m01D)
+sol01D
+```
+
+Ordenadas de mejor a menor
+
+```{r}
+sort(sol01D, decreasing = TRUE)
+```
+
+### Método Borroso
+
+Método de construcción de utilidad "Borroso"
+
+```{r}
+sol01D.borr = multicriterio.constfuncutilidad.estructuraborrosa(m01D)
+sol01D.borr
+```
+
+Ordenadas de mejor a peor
+
+```{r}
+sort(sol01D.borr, decreasing = TRUE)
+```
+
+## Apartado e)
+
+```{r}
+m01E = multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(1,1,1,0,1,
+                                                                    0,1,0,0,1,
+                                                                    1,1,1,0,1,
+                                                                    1,1,1,1,0,
+                                                                    0,0,0,0,1), v.nombres.alternativas = c("a1","a2","a3", "a4", "a5"), numalternativas = 5)
+m01E
+```
+
+### Metodo de maximales 
+```{r}
+sol01E = multicriterio.constfuncutilidad.maximales(m01E)
+sol01E
+```
+
+```{r}
+sort(sol01E, decreasing = T)
+```
+
+### Método Borroso
+
+Método de construcción de utilidad "Borroso"
+
+```{r}
+sol01E.borr = multicriterio.constfuncutilidad.estructuraborrosa(m01E)
+sol01E.borr
+```
+
+
+# Problema 2
+
+## Apartado a)
+
+No se puede aplicar el método Maximal, porque no es una relacion binaria
+
+```{r}
+m02A = multicriterio.crea.matrizvaloraciones(vector_matporfilas =c(0,0.4,0.7,0.2,0,0.5,0.3,0.6,0), numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
+m02A
+```
+
+
+```{r}
+multicriterio.constfuncutilidad.maximales(m02A)
+```
+
+
+### Método Borroso
+
+Método de construcción de la función de utilidad 'Borroso'
+
+```{r}
+sol02A.borr = multicriterio.constfuncutilidad.estructuraborrosa(m02A)
+sol02A.borr
+```
+
+## Apartado b)
+
+```{r}
+m02B=multicriterio.crea.matrizvaloraciones(vector_matporfilas = c(0,0.2,0.4,0.9,0,0.8,0.1,0.3,0), numalternativas = 3, v.nombres.alternativas = c("a1","a2","a3"))
+m02B
+```
+
+### Metodo borroso
+```{r}
+sol02B=multicriterio.constfuncutilidad.estructuraborrosa(m02B)
+sol02B
+```
+```{r}
+sort(sol02B, decreasing = T)
+```
+
+
+
+
+
+# Problema 3
+
+```{r}
+m03= multicriterio.crea.matrizdecision(vector_matporfilas = c(100,15,7,40,50,
+                                                              200,25,7,60,200,
+                                                              100,20,4,25,25,
+                                                              200,30,20,70,350,
+                                                              250,25,15,100,500),numalternativas = 5, numcriterios = 5 )
+m03
+```
+
+## Apartado a)
+
+```{r}
+sol03a = multicriterio.homogeneizacion.nadir(m03)
+sol03a
+```
+
+### Apartado a) con el criterio C1
+
+```{r}
+m03.b= multicriterio.crea.matrizdecision(vector_matporfilas = c(-100,15,7,40,50,
+                                                              -200,25,7,60,200,
+                                                              -100,20,4,25,25,
+                                                              -200,30,20,70,350,
+                                                              -250,25,15,100,500),numalternativas = 5, numcriterios = 5 )
+m03.b
+```
+
+```{r}
+sol03a.b = multicriterio.homogeneizacion.nadir(m03.b)
+sol03a.b
+```
+
+## Apartado b)
+
+```{r}
+sol03b = multicriterio.homogeneizacion.promethee(m03, v.delta.min = c(30,3,4,20,100), v.delta.max = c(120,12,10,60,400)) 
+ # v.delta.min vector de los minimos 
+ # v.delta.max vector de los maximos 
+sol03b
+```
+
+***Instalar el paquete ahp:***
+
+```{r}
+# En https://github.com/gluc/ahp
+# install.packages(c("shinythemes", "shinyAce","shinyjs"))
+# devtools::install_github("gluc/ahp", build_vignettes = TRUE)
+# ahp::RunGUI
+```
+
+# Problema 4
+
+Introducción de datos:
+
+```{r}
+nb.criterios = c("Rendimiento", "Riesgo")
+tb0401 = multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(2), numalternativas = 2, v.nombres.alternativas = nb.criterios)
+tb0401
+```
+
+```{r}
+nb.alternativas = c("A", "B")
+tb0402a = multicriterio.crea.matrizvaloraciones_mej(c(3), numalternativas = 2, v.nombres.alternativas = nb.alternativas)
+tb0402a
+
+```
+
+```{r}
+nb.alternativas = c("A", "B")
+tb0402b = multicriterio.crea.matrizvaloraciones_mej(c(1/2), numalternativas = 2, v.nombres.alternativas = nb.alternativas)
+tb0402b
+```
+
+Obtenemos los pesos locales:
+
+```{r}
+(pl04 = multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0401))
+```
+En el árbol habría que apuntar los pesos locales: 0.6666667 , 0.3333333
+
+```{r}
+(pl0402a = multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0402a))
+```
+
+Según el riesgo es mejor el B que el A...
+
+```{r}
+(pl0402b = multicriterio.metodoAHP.variante1.autovectormayorautovalor(tb0402b))
+```
+
+Pesos globales:
+
+```{r}
+sol04 = multicriterio.metodoAHP.pesosglobales_entabla(pesos.criterios = pl04$valoraciones.ahp,
+                                                     rbind(pl0402a$valoraciones.ahp,
+                                                           pl0402b$valoraciones.ahp))
+sol04
+```
+**Pesos globales** : A->0.61 y B->0.38
+Elegimos la alternativa A, casi el doble mejor (globalmente), en cuanto al Riesgo es mejor la B (el doble) que la A.
+
+El diagrama con la estructura jerárquica:
+
+```{r}
+xmatn01 = tb0401
+Xmatriznivel2 = array(NA,dim=c(2,2,2))
+Xmatriznivel2[,,1] = tb0402a
+Xmatriznivel2[,,2] = tb0402b
+dimnames(Xmatriznivel2)[[1]] = nb.alternativas
+dimnames(Xmatriznivel2)[[2]] = nb.alternativas
+dimnames(Xmatriznivel2)[[3]] = nb.criterios
+multicriterio.metodoahp.diagrama(xmatn01, 
+                                 Xmatriznivel2 )
+# tb0501: tabla de las comparaciones 2 a 2
+# array de 3 dimensiones: num alternativas, num alternativas y num criterios
+```
+
+## Con el paquete ahp
+
+```{r}
+# ahp::RunGUI()
+library(ahp)
+dt04 = Load("ej04.ahp")
+dt04
+```
+
+
+```{r}
+ahp::Calculate(dt04)
+ahp::AnalyzeTable(dt04, sort="orig", variable = "priority")
+ # pesos locales
+
+```
+
+```{r}
+Visualize(dt04)
+```
+
+Pesos globales:
+```{r}
+ahp::AnalyzeTable(dt04, sort="orig")
+```
+
+La mejor alternativa es la A
+
+
+
+
+
+# Problema 5 
+## Metodo AHP
+
+Matriz de criterios:
+```{r}
+nb.criter=c("Liderazgo","Hab personal","Hab gestion")
+nb.alt=c("A","B")
+mcrit=multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(1/3,1/4,2),numalternativas = 3,v.nombres.alternativas = nb.criter)
+mcrit
+```
+Matrices de alternativas para cada criterio:
+- Criterio 1: Liderazgo
+```{r}
+mC1=multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(4),numalternativas = 2, v.nombres.alternativas = nb.alt)
+mC1
+```
+-Criterio 2: Hab.personal
+```{r}
+mC2=multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(3),numalternativas = 2, v.nombres.alternativas = nb.alt)
+mC2
+```
+-Criterio 3: Hab.gestion
+```{r}
+mC3=multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(2),numalternativas = 2, v.nombres.alternativas = nb.alt)
+mC3
+```
+Pesos locales
+Para todos los criterios:
+```{r}
+plC=multicriterio.metodoAHP.variante1.autovectormayorautovalor(mcrit)
+plC$valoraciones.ahp
+```
+Para cada criterio
+```{r}
+(pl051=multicriterio.metodoAHP.variante1.autovectormayorautovalor(mC1))
+```
+```{r}
+(pl052=multicriterio.metodoAHP.variante1.autovectormayorautovalor(mC2))
+```
+```{r}
+(pl053=multicriterio.metodoAHP.variante1.autovectormayorautovalor(mC3))
+```
+Pesos globales 
+```{r}
+multicriterio.metodoAHP.pesosglobales_entabla(plC$valoraciones.ahp,
+                                                     rbind(pl051$valoraciones.ahp,pl052$valoraciones.ahp,pl053$valoraciones.ahp))
+```
+
+El coeficiente de inconsistencia debe quedar por debajo de 0.1 (valor frontera). Si se queda por debajo es que las comparativas que hemos hecho siguen las reglas de las comparaciones. Si no, habría alguna inconsistencia.
+```{r}
+plC
+```
+
+```{r}
+num.alt=2
+num.crit=3
+Xmatriznivel2 = array(NA,dim=c(num.alt,num.alt,num.crit))
+Xmatriznivel2[,,1] = mC1
+Xmatriznivel2[,,2] = mC2
+Xmatriznivel2[,,3] = mC3
+dimnames(Xmatriznivel2)[[1]] = nb.alt
+dimnames(Xmatriznivel2)[[2]] = nb.alt
+dimnames(Xmatriznivel2)[[3]] = nb.criter
+multicriterio.metodoahp.diagrama(mcrit, 
+                                 Xmatriznivel2 )
+```
+
+```{r}
+#ahp::RunGUI()
+dt05=Load("ej05.ahp")
+dt05
+```
+```{r}
+Calculate(dt05)
+Visualize(dt05)
+```
+```{r}
+AnalyzeTable(dt05, sort="orig", variable = "priority")
+```
+```{r}
+AnalyzeTable(dt05, sort="orig")
+```
+# Problema 6 
+*Metodo ahp (multinivel)*
+
+Matriz de criterios
+```{r}
+mc6=multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(7,9,3),numalternativas = 3,v.nombres.alternativas = c("Costo","Confiabilidad","Plazo Entrega"))
+mc6
+```
+
+Matrices de alternativas para cada criterio:
+- Criterio Costo:
+```{r}
+mc61=multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(1/3,6,8),numalternativas = 3,v.nombres.alternativas = c("A","B","C"))
+mc61
+```
+-Criterio Confiabilidad
+```{r}
+mc62=multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(6,2,1/3),numalternativas = 3,v.nombres.alternativas = c("A","B","C"))
+mc62
+```
+- Criterio Plazo Entrega
+```{r}
+mc63=multicriterio.crea.matrizvaloraciones_mej(vector_valoraciones_diagsup = c(8,1,1/8),numalternativas = 3,v.nombres.alternativas = c("A","B","C"))
+mc63
+```
+## apartado a)
+Diagrama de jerarquias
+```{r}
+# matriz 
+nb.alt=c("A","B","C")
+nb.c=c("Costo","Confiabilidad","Plazo Entrega")
+num.alt=3
+num.crit=3
+Xmatriznivel2 = array(NA,dim=c(num.alt,num.alt,num.crit))
+Xmatriznivel2[,,1] = mc61
+Xmatriznivel2[,,2] = mc62
+Xmatriznivel2[,,3] = mc63
+dimnames(Xmatriznivel2)[[1]] = nb.alt
+dimnames(Xmatriznivel2)[[2]] = nb.alt
+dimnames(Xmatriznivel2)[[3]] = nb.c
+multicriterio.metodoahp.diagrama(mc6, 
+                                 Xmatriznivel2 )
+```
+
+
+
+## apartado b) 
+Pesos locales:
+```{r}
+(pl6=multicriterio.metodoAHP.variante1.autovectormayorautovalor(mc6))
+```
+Los pesos locales de los criterios son :
+0.78539119    0.14881507    0.06579374 respectivamente
+
+## apartado c) 
+Pesos para cada alternativa
+```{r}
+(pl61=multicriterio.metodoAHP.variante3.basico(mc61))
+```
+
+Los pesos locales de cada alternativa para los costos:
+0.28952381 0.64634921 0.06412698 respectivamente
+
+```{r}
+(pl62=multicriterio.metodoAHP.variante3.basico(mc62))
+```
+Los pesos locales de cada alternativa para cpnfiabilidad:
+0.6 0.1 0.3 respectivamente
+
+```{r}
+(pl63=multicriterio.metodoAHP.variante3.basico(mc63))
+```
+
+Los pesos de cada alternativa para Plazo de entrega:
+0.47058824 0.05882353 0.47058824 
+ respectivamente
+
+## apartado d)
+Verificar la consistencia de las preferencias del centro decisor
+- Criterios
+```{r}
+multicriterio.metodoAHP.variante3.basico.coef.inconsistencia(mc6)
+#pl6$RI.coef.inconsistencia
+```
+- Costos
+```{r}
+multicriterio.metodoAHP.variante3.basico.coef.inconsistencia(mc61)
+```
+
+- Confiabilidad
+```{r}
+multicriterio.metodoAHP.variante3.basico.coef.inconsistencia(mc62)
+```
+
+-Plazo de entrega
+```{r}
+multicriterio.metodoAHP.variante3.basico.coef.inconsistencia(mc63)
+```
+
+
+## apartado e) 
+Prioridad global de cada proveedor
+
+```{r}
+# Pesos globales en tabla
+tb.pesosG=multicriterio.metodoAHP.pesosglobales_entabla(pl6$valoraciones.ahp, rbind(pl61$valoraciones.ahp,pl62$valoraciones.ahp,pl63$valoraciones.ahp))
+tb.pesosG
+knitr::kable(tb.pesosG)
+#knit::kable(tb.pesosG*100,digits=2)
+```
+
+Son respectivamente: 	0.3476403	0.5263887	0.1259711
+
+Pesos de cada rama:
+```{r}
+vect.pesos.criterios=tb.pesosG[4,1:3]
+vect.pesos.alt_crit=tb.pesosG[1:3,1:3]
+mPondramasb=vect.pesos.alt_crit*matrix(vect.pesos.criterios,ncol=3,nrow = 3,byrow = T)
+mPondramas=tb.pesosG
+mPondramas[1:3,1:3]=mPondramasb
+mPondramas[4,4]=1
+#mPondramas
+knitr::kable(mPondramas)
+```
+
+
+## Liberia ahp
+```{r}
+library(ahp)
+dt06=Load("ej06.ahp")
+dt06
+```
+```{r}
+Calculate(dt06)
+Visualize(dt06)
+```
+
+Pesos locales
+```{r}
+AnalyzeTable(dt06,sort = "orig",variable = "priority")
+# primera columna pesos locales de cada criterio
+# columnas siguientes pesos locales de cada alternativa en cada criterio
+```
+Pesos globales
+```{r}
+AnalyzeTable(dt06,sort = "orig")
+# primera fila: prioridad global de cada proveedor
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Problema 7
+Matriz de decision
+```{r}
+p7=multicriterio.crea.matrizdecision(c(100,15,7,40,-50,
+                                       200,25,7,60,-200,
+                                       100,20,4,25,-25,
+                                       200,30,20,70,-350,
+                                       250,25,15,100,-500),
+                                     numalternativas = 5,numcriterios = 5)
+p7
+# Cambiamos el signo a la columna del criterio 5 porque serían costos
+``` 
+
+```{r}
+pesos = c(0.25,0.25,0.2,0.2,0.2)
+sal7 = multicriterio.metodoELECTRE_I(p7, pesos.criterios = pesos, nivel.concordancia.minimo.alpha = 0.7, no.se.compensan = c(60,Inf,4,Inf,Inf), que.alternativas = T)
+```
+
+Subconjuntos dominantes minimales que son núcleo ( :
+```{r}
+sal7$nucleo_aprox
+```
+
+```{r}
+qgraph::qgraph(sal7$relacion.dominante)
+```
+
+Iteracion 2: se reducen alternativas y/o alfa
+```{r}
+sal7b = multicriterio.metodoELECTRE_I(p7, pesos.criterios = pesos, nivel.concordancia.minimo.alpha = 0.7, no.se.compensan = c(60,Inf,4,Inf,Inf), que.alternativas = c(4,5))
+qgraph::qgraph(sal7b$relacion.dominante)
+```
+```{r}
+sal7b$nucleo_aprox
+```
+
+Iteracion 3: se reducen alternativas y/o alfa (en este caso se reduce alfa)
+```{r}
+sal7c = multicriterio.metodoELECTRE_I(p7, pesos.criterios = pesos, nivel.concordancia.minimo.alpha = 0.55, no.se.compensan = c(60,Inf,40,Inf,Inf), que.alternativas = c(4,5))
+qgraph::qgraph(sal7c$relacion.dominante)
+```
+
+```{r}
+sal7c$nucleo_aprox
+```
+```{r}
+r7  = func_ELECTRE_Completo(sal7)
+r7$Grafo
+```
+## Promethee I
+```{r}
+pesosP=pesos/sum(pesos)
+tablafp=matrix(c(1,0,0,0,
+                 1,0,0,0,
+                 1,0,0,0,
+                 1,0,0,0,
+                 1,0,0,0),ncol = 4,byrow = T)
+tablafp
+```
+
+Resolucion
+```{r}
+sol7Pro=multicriterio.metodo.promethee_i(p7,
+                                         pesosP,tablafp)
+sol7Pro
+```
+
+## Promethee II
+```{r}
+sol7ProII=multicriterio.metodo.promethee_ii(p7,
+                                         pesosP,tablafp)
+sol7ProII
+```
+
+```{r}
+order(sol7ProII$vflujos.netos,decreasing = T)
+```
+
+
+## ArrowRaimond
+
+```{r}
+sol7Arrow=multicriterio.metodoaxiomatico.ArrowRaymond(p7)
+sol7Arrow
+```
+
+Mismo orden de preferencias (alternativas 1 y 3 "igual de preferencia")
+
+### Cambiando las valoraciones de la primera alternativa en todos los criterios
+
+```{r}
+intalfa=seq(1,2,0.1)
+sols=vector("list",length(intalfa))
+for (i in 1:length(intalfa)){
+    pej_i=p7
+    pej_i[1,]=pej_i[1,]*intalfa[i]
+    sol_i=multicriterio.metodoaxiomatico.ArrowRaymond(pej_i)
+    sols[[i]]=sol_i$alternativasordenadas
+}
+sols
+```
+
+
+
+
+# Problema 8 
+## Resolucion con metodo ELECTRE
+```{r}
+p8=multicriterio.crea.matrizdecision(c(-80,90,-6,-5.4,-8,5,
+                                                  -65,58,-2,-9.7,-1,1,
+                                                  -83,60,-4,-7.2,-4,7,
+                                                  -40,80,-10,-7.5,-7,10,
+                                                  -52,72,-6,-2,-3,8,
+                                                  -94,96,-7,-3.6,-5,6),numalternativas = 6, numcriterios = 6,v.nombresalt = c("A1","A2","A3","A4","A5","A6"), v.nombrescri = c("f1","f2","f3","f4","f5","f6"))
+p8
+```
+Iteraccion 1
+```{r}
+sol8electre=multicriterio.metodoELECTRE_I(tabdecs.X = p8,pesos.criterios = rep(1/6,6),nivel.concordancia.minimo.alpha = 0.7,
+                                          no.se.compensan = rep(Inf,6),
+                                                que.alternativas = T)
+sol8electre$nucleo_aprox
+```
+```{r}
+qgraph::qgraph(sol8electre$relacion.dominante)
+```
+
+Iteraccion 2
+```{r}
+sol8electreb=multicriterio.metodoELECTRE_I(tabdecs.X = p8,pesos.criterios = rep(1/6,6),nivel.concordancia.minimo.alpha = 0.7,
+                                          no.se.compensan = rep(Inf,6),
+                                                que.alternativas = c(2,4,5))
+sol8electreb$nucleo_aprox
+```
+```{r}
+qgraph::qgraph(sol8electreb$relacion.dominante)
+```
+Iteraccion 3: reducimos alfa
+```{r}
+sol8electrec=multicriterio.metodoELECTRE_I(tabdecs.X = p8,pesos.criterios = rep(1/6,6),nivel.concordancia.minimo.alpha = 0.55,
+                                          no.se.compensan = rep(Inf,6),
+                                                que.alternativas = c(4,5))
+sol8electrec$nucleo_aprox
+```
+```{r}
+qgraph::qgraph(sol8electrec$relacion.dominante)
+```
+
+## Resolucion con el metodo PROMETHEE
+
+```{r}
+pesos.criterios = c(1/6,1/6,1/6,1/6,1/6,1/6)
+```
+
+Calculamos las funciones de preferencia de cada criterio:`
+```{r}
+# argumentos de la matriz: num.funcion, qi, pi, si
+tab.fpref = matrix (c(2,10,1,0,
+                      3,0,30,0,
+                     5,0.5,5,0,
+                      4,1,6,0,
+                      1,0,1,0,
+                      6,0,1,5), ncol = 4, byrow = T)
+tab.fpref
+```
+### PROMETHEE I
+
+```{r}
+tb08.prometheeI=multicriterio.metodo.promethee_i(p8, pesos.criterios, tab.fpref )
+tb08.prometheeI
+```
+```{r}
+qgraph::qgraph(tb08.prometheeI$tablarelacionsupera
+)
+```
+
+### PROMETHEE II
+```{r}
+tb08.prometheeII=multicriterio.metodo.promethee_ii(p8,pesos.criterios ,tab.fpref)
+tb08.prometheeII
+```
+
+
+```{r}
+qgraph::qgraph(tb08.prometheeII$tablarelacionsupera)
+```
+```{r}
+order(tb08.prometheeII$vflujos.netos, decreasing = T)
+```
+
+### PI con medias
+
+```{r}
+tb08.prometheeImed=multicriterio.metodo.promethee_i_med(p8,pesos.criterios,tab.fpref)
+tb08.prometheeImed
+```
+
+```{r}
+qgraph::qgraph(tb08.prometheeImed$tablarelacionsupera)
+```
+
+### PII con medias
+```{r}
+tb08.prometheeIImed=multicriterio.metodo.promethee_ii_med(p8,pesos.criterios,tab.fpref)
+tb08.prometheeIImed
+```
+```{r}
+qgraph::qgraph(tb08.prometheeIImed$tablarelacionsupera)
+```
+```{r}
+order(tb08.prometheeIImed$vflujos.netos,decreasing = T)
+```
+Es la misma ordenación en el PROMETHEE II que en el PROMETHEE II con medias
+
+## ArrowRaimond (metodo axiomatico)
+
+```{r}
+s8arrow = multicriterio.metodoaxiomatico.ArrowRaymond(p8)
+s8arrow
+```
+
+Las alternativas ordenadas de mejor a peor:
+```{r}
+s8arrow$alternativasordenadas
+```
+
+
+# Ejemplo Metodo axiomatico ArrowRaimond
+
+```{r}
+pej=multicriterio.crea.matrizdecision(c(8,25,20,10,-75,-5,
+                                        12,35,17,25,-100,-7,
+                                        10,40,40,35,-125,-2,
+                                        15,4,20,20,-35,-4,
+                                        12,35,15,45,-75,-6),
+                                      numalternativas = 5, numcriterios = 6)
+pej
+```
+```{r}
+solArrow=multicriterio.metodoaxiomatico.ArrowRaymond(pej)
+solArrow
+```
+
+
+
+
+
